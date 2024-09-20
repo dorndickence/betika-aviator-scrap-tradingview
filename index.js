@@ -8,9 +8,11 @@ const app = express();
 
 const server = createServer(app);
 const io = new Server(server, {
+  path: "/socket.io"
+  ,
   cors: {
     origin: "*",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST","OPTIONS"],
     allowedHeaders: ["*"],
     credentials: true,
   },
@@ -18,9 +20,9 @@ const io = new Server(server, {
 // const io = new Server(server, { cors: ["http://localhost:4173"] });
 
 io.on("connection", async (socket) => {
-  console.log(socket.id +" connected");
+  console.log(socket.id + " connected");
   const data = await getData();
-  socket.emit('data',data)
+  socket.emit("data", data);
   // socket.emit("data", data);
 
   socket.on("period", async (period) => {
@@ -106,16 +108,3 @@ async function getDataFrom(period) {
 
   return result.rows;
 }
-
-// CREATE OR REPLACE FUNCTION flyaways_insert_trigger()
-// RETURNS TRIGGER AS $$
-// BEGIN
-//   PERFORM pg_notify('flyaways_insert', row_to_json(NEW)::text);
-//   RETURN NEW;
-// END;
-// $$ LANGUAGE plpgsql;
-
-// CREATE TRIGGER flyaways_insert_trigger
-// AFTER INSERT ON flyaways
-// FOR EACH ROW
-// EXECUTE PROCEDURE flyaways_insert_trigger();

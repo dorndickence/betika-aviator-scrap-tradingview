@@ -96,7 +96,7 @@ export function Chart(props) {
 
   useEffect(() => {
 
-    const socket = io("http://localhost:3000",{
+      const socket = io("http://localhost:3000",{
       transports: ['polling', 'websocket'],
     });
     setSocket(socket)
