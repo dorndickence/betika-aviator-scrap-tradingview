@@ -2,12 +2,12 @@ import pg from "pg";
 
 const { Pool } = pg;
 const pool = new Pool({
-  user: 'postgres',
+  user: 'postgres.ueliqlmohqswycazcamy',
   // password: '',
-  password: 'root',
-  host: 'localhost',
-  port: 5432,
-  database: 'aviator',
+  password: 'Dornai@4449',
+  host: 'aws-0-ap-south-1.pooler.supabase.com',
+  port: 6543,
+  database: 'postgres',
 });
 
 export const getClient = async () => {
